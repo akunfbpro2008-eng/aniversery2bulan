@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>2 Month Anniversary 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --pink:#ff6fb1;
+  --blue:#6ecbff;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,var(--pink),var(--blue));
+  overflow:hidden;
+  color:white;
+}
+
+/* PAGE */
+.page{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  transition:1s ease;
+}
+
+.hidden{
+  opacity:0;
+  pointer-events:none;
+  transform:scale(.9);
+}
+
+/* CARD */
+.card{
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(18px);
+  border-radius:25px;
+  padding:35px 30px;
+  width:90%;
+  max-width:420px;
+  text-align:center;
+  box-shadow:0 25px 50px rgba(0,0,0,.3);
+  animation:pop 1.2s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(.6);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+/* HEARTS */
+.heart{
+  position:absolute;
+  font-size:20px;
+  animation:float 8s linear infinite;
+  opacity:.7;
+}
+@keyframes float{
+  0%{transform:translateY(100vh);opacity:0}
+  20%{opacity:1}
+  100%{transform:translateY(-10vh);opacity:0}
+}
+
+/* COUPLE */
+.couple{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  margin:25px 0;
+}
+.person{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--pink),var(--blue));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:50px;
+  animation:bounce 2s infinite;
+}
+.person.boy{animation-delay:.3s}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+
+/* BUTTON */
+button{
+  margin-top:20px;
+  padding:12px 32px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(90deg,var(--pink),var(--blue));
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+  transition:.3s;
+}
+button:hover{transform:scale(1.1)}
+
+/* ALBUM */
+.album{
+  width:200px;
+  height:200px;
+  border-radius:20px;
+  background:url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4') center/cover;
+  margin:20px auto;
+  animation:spin 6s linear infinite;
+}
+
+@keyframes spin{
+  from{transform:rotate(0)}
+  to{transform:rotate(360deg)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ❤️ Floating Hearts -->
+<script>
+for(let i=0;i<25;i++){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=15+Math.random()*20+"px";
+  h.style.animationDuration=5+Math.random()*6+"s";
+  document.body.appendChild(h);
+}
+</script>
+
+<!-- 🎵 AUDIO LOKAL (PASTI BUNYI) -->
+<audio id="music" preload="auto">
+  <source src="SaveTik.io_7279642252920622341.mp3" type="audio/mpeg">
+  Browser kamu tidak mendukung audio.
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page" id="page1">
+  <div class="card">
+    <h2>Happy 2 Month Anniversary</h2>
+    <h1>Ameliya 💕 Daffa</h1>
+
+    <div class="couple">
+      <div class="person">👩</div>
+      <div class="person boy">👨</div>
+    </div>
+
+    <p>Kita bersama selama</p>
+    <h2><span id="days">0</span> Hari ❤️</h2>
+    <p>💖 2 Bulan Anniversary 💖</p>
+
+    <button onclick="nextPage()">Semoga Langgeng Ya Sayang 💗</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page hidden" id="page2">
+  <div class="card">
+    <h2>Our Love Album 💿</h2>
+
+    <div class="album"></div>
+
+    <p>Lagu ini khusus buat kita berdua 💕</p>
+
+    <button onclick="toggleMusic()">▶ Play / ⏸ Pause</button>
+  </div>
+</div>
+
+<script>
+// 📅 TANGGAL JADIAN (SUDAH DIUBAH)
+const startDate = new Date("2025-11-17");
+
+// HITUNG HARI
+const now = new Date();
+const days = Math.floor((now - startDate) / (1000*60*60*24));
+document.getElementById("days").innerText = days >= 0 ? days : 0;
+
+// PINDAH PAGE + PLAY MUSIC (AMAN BROWSER)
+function nextPage(){
+  document.getElementById("page1").classList.add("hidden");
+  document.getElementById("page2").classList.remove("hidden");
+
+  const music = document.getElementById("music");
+  music.currentTime = 0;
+  music.volume = 1;
+  music.play().catch(()=>{
+    alert("Pastikan file lagu-kita.mp3 ada di folder yang sama dengan HTML");
+  });
+}
+
+// PLAY / PAUSE
+function toggleMusic(){
+  const music = document.getElementById("music");
+  music.paused ? music.play() : music.pause();
+}
+</script>
+
+</body>
+</html>
